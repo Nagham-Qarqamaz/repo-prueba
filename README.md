@@ -20,8 +20,8 @@ The backend of this application utilizes a MySQL database. To ensure proper func
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:Your_port/Your_schema_name
-spring.datasource.username=Your_datasource_username
-spring.datasource.password=Your_datasource_password
+spring.datasource.username=Your_database_username
+spring.datasource.password=Your_database_password
 ```
 
 Ensure that MySQL is running and accessible at the specified port and schema name before starting the backend.
