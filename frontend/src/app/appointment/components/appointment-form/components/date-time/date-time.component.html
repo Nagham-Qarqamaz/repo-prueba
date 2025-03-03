@@ -1,0 +1,48 @@
+<!-- Hidden datetime-local input (required for form submission) -->
+<input 
+    type="datetime-local" 
+    [(ngModel)]="newAppointment.date"
+    name="date"
+    class="hidden"
+    required 
+/>
+
+<div>
+    <label class="block text-gray-700 font-medium mb-1">📆 Select Date <span class="text-red-500">*</span></label>
+    <input 
+        type="date" 
+        name="selected-date" 
+        class="w-full border p-3 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
+        (change)="onDateChange()"
+        required 
+    />
+    <div class="text-red-500 text-[14px]" *ngIf="inputErrors.date != ''">
+        {{inputErrors.date}}
+    </div>
+</div>
+
+<div>
+    <label class="block text-gray-700 font-medium mb-2 mt-4">⏰ Select Time <span class="text-red-500">*</span></label>
+    <input 
+        type="time" 
+        name="selected-time" 
+        class="hidden"
+        required 
+    />
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div 
+            *ngFor="let hour of hours" 
+            class="text-center text-white px-4 py-2 rounded-lg shadow-md transition-all duration-200"
+            [ngClass]="{
+                'bg-blue-500 hover:bg-blue-600 cursor-pointer': !hour.isDisabled && !hour.isSelected,
+                'bg-blue-200 cursor-not-allowed': hour.isDisabled,
+                'bg-green-500 shadow-lg': hour.isSelected
+            }"
+            (click)="!hour.isDisabled && updateTime(hour.time)">
+            {{ hour.time }}:00 - {{ (hour.time + 1) % 24 }}:00
+        </div>
+    </div>
+    <div class="text-red-500 text-[14px]" *ngIf="inputErrors.time != ''">
+        {{inputErrors.time}}
+    </div>
+</div>

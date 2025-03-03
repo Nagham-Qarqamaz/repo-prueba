@@ -1,0 +1,21 @@
+<header class="bg-black text-white py-4 h-16 flex justify-center items-center">
+    <container>
+        <div class="hidden sm:flex gap-8 text-[16px]">
+            <a routerLink="/">Home</a>
+            <a routerLink="/book-appointment">Book Now</a>
+            <a routerLink="/appointments">Appointments</a>
+        </div>
+        <div class="sm:hidden relative">
+            <button (click)="toggleHamburger()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+            <div *ngIf="isHamburgerOpen" class="flex flex-col gap-4 absolute bg-black p-6 rounded-xl">
+                <a (click)="closeHamburger()" routerLink="/">Home</a>
+                <a (click)="closeHamburger()" routerLink="/book-appointment">Book Now</a>
+                <a (click)="closeHamburger()" routerLink="/appointments">Appointments</a>
+            </div>
+        </div>
+    </container>
+</header>

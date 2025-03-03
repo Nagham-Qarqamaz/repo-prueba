@@ -1,0 +1,47 @@
+<container>
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+        <div *ngFor="let appointment of appointments"
+             class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between border border-gray-200">
+            <div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">👤 {{ appointment.customer }}</h3>
+                    <p class="text-sm text-gray-600">Appointment for: {{ appointment.pet }}</p>
+                </div>
+                <p class="mb-2 reason-truncated line-clamp-2">{{ appointment.reason }}</p>
+                <p class="text-gray-500 text-sm">📆 {{ appointment.date | date:'MMM d, y h:mm a' }}</p>
+            </div>
+            <div class="flex justify-between items-center mt-4">
+                <button (click)="deleteAppointment(appointment.id)"
+                        class="cursor-pointer text-red-600 hover:text-red-800 transition-colors duration-200 text-sm">
+                    Delete
+                </button>
+                <a [routerLink]="['/appointments', appointment.id]"
+                   class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md transition-colors duration-200 text-sm">
+                    View Details
+                </a>
+            </div>
+        </div>
+        <div *ngIf="appointments.length === 0" class="col-span-full text-center mt-8">
+            <p class="text-lg text-gray-600">No appointments found.</p>
+        </div>
+    </div>
+    <div *ngIf="appointments.length > 0" class="flex justify-center items-center space-x-4 mt-8">
+        <button (click)="prevPage()" [disabled]="currentPage === 0"
+                class="cursor-pointer px-3 py-2 transition-colors duration-200 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                 [ngClass]="{'text-blue-500 hover:text-blue-700': currentPage !== 0, 'text-gray-300': currentPage === 0}"
+                 class="w-6 h-6 mr-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <span class="text-gray-700 text-sm">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1"
+                class="cursor-pointer px-3 py-2 transition-colors duration-200 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                 [ngClass]="{'text-blue-500 hover:text-blue-700': currentPage < totalPages - 1, 'text-gray-300': currentPage >= totalPages - 1}"
+                 class="w-6 h-6 ml-1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+</container>

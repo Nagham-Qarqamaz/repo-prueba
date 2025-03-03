@@ -1,0 +1,78 @@
+<container>
+    <div class="mt-16 flex justify-center items-start">
+        <div *ngIf="isDeleted" class="w-full max-w-2xl">
+            <div class="mb-6 text-green-700 bg-green-50 rounded-lg p-6 text-center shadow-md border border-green-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 mx-auto mb-4 text-green-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-lg font-semibold">Appointment deleted successfully!</p>
+                <p class="mt-2 text-sm text-gray-600">The appointment has been removed from your schedule.</p>
+            </div>
+            <div class="mt-8 text-center">
+                <a class="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg text-lg transition-colors duration-200" routerLink="/appointments">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    Back to Appointments
+                </a>
+            </div>
+        </div>
+        <div
+            *ngIf="!isDeleted"
+            class="shadow-lg p-6 rounded-2xl border border-gray-200 w-full max-w-2xl"
+        >
+            <div *ngIf="appointment" class="space-y-6">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4 border-b pb-2">
+                    Appointment Details
+                </h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <strong class="block text-gray-700 mb-1">Customer:</strong>
+                        <p class="text-gray-900">{{ appointment.customer }}</p>
+                    </div>
+                    <div>
+                        <strong class="block text-gray-700 mb-1">Pet:</strong>
+                        <p class="text-gray-900">{{ appointment.pet }}</p>
+                    </div>
+
+                    <div>
+                        <strong class="block text-gray-700 mb-1">Date:</strong>
+                        <p class="text-gray-900">{{ appointment.date | date:'MMM d, y h:mm a' }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <strong class="block text-gray-700 mb-1">Reason:</strong>
+                    <p class="text-gray-900 whitespace-pre-line">{{ appointment.reason }}</p>
+                </div>
+
+                <div class="flex justify-end">
+                    <button
+                        (click)="deleteAppointment(appointment.id)"
+                        class="cursor-pointer bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    >
+                        Delete Appointment
+                    </button>
+                </div>
+
+                <div class="mt-8 border-t pt-4 text-sm text-gray-600">
+                    <p>
+                        This appointment was scheduled for {{ appointment.date | date:'MMM d, y h:mm a' }}. If you need
+                        to reschedule or have any questions, please contact our clinic.
+                    </p>
+                    <p class="mt-2">
+                        We value your pet's health and look forward to seeing you.
+                    </p>
+                </div>
+            </div>
+
+            <div *ngIf="!appointment" class="text-center py-8">
+                <p class="text-xl text-gray-600">Appointment not found.</p>
+                <p class="mt-2 text-sm text-gray-500">
+                    Please check the appointment ID and try again.
+                </p>
+            </div>
+        </div>
+    </div>
+</container>
