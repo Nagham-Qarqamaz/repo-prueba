@@ -37,7 +37,7 @@ Ensure that MySQL is running and accessible at the specified port and schema nam
 ### Installation Steps
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/repo-prueba.git
+   git clone https://github.com/Nagham-Qarqamaz/repo-prueba.git
    ```
 2. Navigate to the backend folder:
    ```sh
